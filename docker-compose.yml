@@ -5,9 +5,14 @@ services:
     image: ddtq/sia-app:0.1
     volumes:
       - ".:/var/www/html"
+    depends_on:
+      - db
   web:
     image: ddtq/sia-web:0.1
     ports:
       - "8080:80"
     depends_on:
       - app
+  db:
+    image: postgres:12.2
+    env_file: .env
